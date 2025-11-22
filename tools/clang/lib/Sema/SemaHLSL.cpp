@@ -14914,6 +14914,15 @@ void hlsl::HandleDeclAttributeForHLSL(Sema &S, Decl *D, const AttributeList &A,
         A.getNumArgs() < 2 ? INT_MIN : ValidateAttributeIntArg(S, A, 1),
         A.getAttributeSpellingListIndex());
     break;
+  case AttributeList::AT_StarFrequency: {
+    StarFrequencyAttr::FrequencyType Kind = ValidateAttributeEnumArg<
+        StarFrequencyAttr, StarFrequencyAttr::FrequencyType,
+        StarFrequencyAttr::ConvertStrToFrequencyType>(
+        S, A, StarFrequencyAttr::FrequencyType::Batch);
+    declAttr = ::new (S.Context) StarFrequencyAttr(
+        A.getRange(), S.Context, Kind, A.getAttributeSpellingListIndex());
+    break;
+  }
   case AttributeList::AT_VKCounterBinding:
     declAttr = ::new (S.Context) VKCounterBindingAttr(
         A.getRange(), S.Context, ValidateAttributeIntArg(S, A),

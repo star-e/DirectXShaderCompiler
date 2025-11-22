@@ -236,6 +236,7 @@ def Borland : LangOpt<"Borland">;
 def CUDA : LangOpt<"CUDA">;
 def COnly : LangOpt<"CPlusPlus", 1>;
 def SPIRV : LangOpt<"SPIRV">; // SPIRV Change
+def Star : LangOpt<"Star">; // Star Change
 
 // Defines targets for target-specific attributes. The list of strings should
 // specify architectures for which the target applies, based off the ArchType
@@ -1659,6 +1660,21 @@ def VKStencilRefLessEqualBack : InheritableAttr {
   let Documentation = [Undocumented];
 }
 // SPIRV Change Ends
+
+// Star Change Begins
+
+def StarFrequency : InheritableAttr {
+  let Spellings = [CXX11<"star", "frequency">];
+  let Subjects = SubjectList<[GlobalVar, HLSLBuffer, ConstantTextureBuffer],
+                             ErrorDiag, "ExpectedGlobalVarOrCTBuffer">;
+  let Args = [EnumArgument<"Frequency", "FrequencyType",
+                           ["pass", "queue", "batch", "instance"],
+                           ["Pass", "Queue", "Batch", "Instance"]>];
+  let LangOpts = [Star];
+  let Documentation = [Undocumented];
+}
+
+// Star Change Ends
 
 def C11NoReturn : InheritableAttr {
   let Spellings = [Keyword<"_Noreturn">];

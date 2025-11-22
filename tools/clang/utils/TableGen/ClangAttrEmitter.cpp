@@ -1932,7 +1932,7 @@ static void GenerateHasAttrSpellingStringSwitch(
       // vk namespace
       std::vector<FlattenedSpelling> Spellings = GetFlattenedSpellings(*Attr);
       for (const auto &S : Spellings)
-        if (S.nameSpace() == "vk") {
+        if (S.nameSpace() == "vk" || S.nameSpace() == "star") { // Star Change
           Test = "(LangOpts.HLSL || LangOpts.CPlusPlus11)";
           break;
         }

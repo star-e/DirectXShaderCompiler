@@ -175,6 +175,8 @@ public:
   unsigned SpirvMajorVersion; // SPIRV Change
   unsigned SpirvMinorVersion; // SPIRV Change
 
+  bool Star = true; // Star Change
+
   bool isSignedOverflowDefined() const {
     return getSignedOverflowBehavior() == SOB_Defined;
   }
